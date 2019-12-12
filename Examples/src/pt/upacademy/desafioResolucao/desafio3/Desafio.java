@@ -1,4 +1,4 @@
-package pt.upacademy.desafios.desafio3;
+package pt.upacademy.desafioResolucao.desafio3;
 
 public class Desafio {
 

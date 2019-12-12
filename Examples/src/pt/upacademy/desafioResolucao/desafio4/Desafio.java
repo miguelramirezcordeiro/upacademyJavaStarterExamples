@@ -1,4 +1,4 @@
-package pt.upacademy.desafios.desafio4;
+package pt.upacademy.desafioResolucao.desafio4;
 
 import java.util.ArrayList;
 import java.util.List;
