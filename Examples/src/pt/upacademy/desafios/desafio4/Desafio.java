@@ -1,47 +1,38 @@
 package pt.upacademy.desafios.desafio4;
 
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+
 public class Desafio {
+	
+	static List<Integer> finalArray = new ArrayList<Integer>();
 
-	private static Scanner scanner;
-
-	public static int[] ints(String msg) {
-		List<Integer> result = new ArrayList<Integer>();
-		
-		scanner = new Scanner(msg);
-		while (scanner.hasNext()) {
-			if (scanner.hasNextInt()) {
-				result.add(scanner.nextInt());
-			} else {
-				scanner.next();
-			}		
+	public static int[] ints(String str) {
+		finalArray.clear();
+		String[] parts = str.split(" ");
+		System.out.println(Arrays.toString(parts));
+		for (int i = 0; i < parts.length; i++) {
+			String test = parts[i];
+			Scanner sc = new Scanner(test);
+			if (sc.hasNextInt() == true) {
+				finalArray.add(Integer.parseInt(test));
+				sc.close();
+			}else {
+				System.out.println("Erro");
+			}
+		}
+		System.out.println(finalArray);
+		int[] ultimo =new int[finalArray.size()];
+		for (int i = 0; i < ultimo.length; i++) {
+			ultimo[i] = finalArray.get(i);
 		}
 		
-//		String[] numbers = msg.split(" ");
-//		for (String string : numbers) {
-//			try {
-//				int num = Integer.parseInt(string);
-//				result.add(num);
-//			} catch (Exception e) {}
-//		}
 		
-//		if (msg == "") return new int[]{};
-//		String[] numbers = msg.split(" ");
-//		for (String s : numbers) {
-//			boolean isInt = true;
-//			for(int i = 0; i < s.length(); i++) {
-//		        if(Character.digit(s.charAt(i),10) < 0) {
-//		        	isInt = false;
-//		        	break;
-//		        }
-//		    }
-//			if (isInt) result.add(Integer.parseInt(s));
-//		}
-
-		
-		return result.stream().mapToInt(i -> i).toArray();
+		return ultimo;
 	}
+
 }
