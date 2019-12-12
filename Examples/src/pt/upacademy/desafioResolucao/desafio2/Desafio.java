@@ -1,4 +1,4 @@
-package pt.upacademy.desafios.desafio2;
+package pt.upacademy.desafioResolucao.desafio2;
 
 import java.util.Arrays;
 import java.util.Comparator;

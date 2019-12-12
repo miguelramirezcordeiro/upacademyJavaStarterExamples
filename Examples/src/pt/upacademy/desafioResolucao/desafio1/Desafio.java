@@ -1,4 +1,4 @@
-package pt.upacademy.desafios.desafio1;
+package pt.upacademy.desafioResolucao.desafio1;
 
 public class Desafio {
 	private int num, big3Count = 0, big5Count = 0;
