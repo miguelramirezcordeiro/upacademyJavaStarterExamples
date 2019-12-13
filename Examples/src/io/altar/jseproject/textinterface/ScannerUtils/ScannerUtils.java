@@ -14,10 +14,20 @@ public class ScannerUtils {
 		lineSc = new Scanner(value);
 		return lineSc.hasNextInt();
 	}
+	
+	public boolean isFloat(String value) {
+		lineSc = new Scanner(value);
+		return lineSc.hasNextFloat();
+	}
 
 	public int toInt(String value) {
 		lineSc = new Scanner(value);
 		return lineSc.nextInt();
+	}
+	
+	public float toFloat(String value) {
+		lineSc = new Scanner(value);
+		return lineSc.nextFloat();
 	}
 
 	public int getInt(String msg) {
@@ -29,6 +39,20 @@ public class ScannerUtils {
 			if (isInt(value)) {
 				valid = true;
 				result = toInt(value);
+			}
+		} while (!valid);
+		return result;
+	}
+	
+	public float getFloat(String msg) {
+		boolean valid = false;
+		float result = 0;
+		do {
+			System.out.println(msg);
+			String value = getValue();
+			if (isFloat(value)) {
+				valid = true;
+				result = toFloat(value);
 			}
 		} while (!valid);
 		return result;
@@ -58,6 +82,15 @@ public class ScannerUtils {
 		do {
 			String myMsg = msg + min + " e " + max;
 			result = getInt(myMsg);
+		} while (result < min || result > max);
+		return result;
+	}
+	
+	public float getValidFloat(String msg, float min, float max) {
+		float result;
+		do {
+			String myMsg = msg + min + " e " + max;
+			result = getFloat(myMsg);
 		} while (result < min || result > max);
 		return result;
 	}

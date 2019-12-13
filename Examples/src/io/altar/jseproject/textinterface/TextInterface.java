@@ -1,9 +1,14 @@
 package io.altar.jseproject.textinterface;
 
+import io.altar.jseproject.repositories.ProductRepository;
+import io.altar.jseproject.repositories.ShelfRepository;
 import io.altar.jseproject.textinterface.ScannerUtils.ScannerUtils;
+
 
 public class TextInterface {
 	ScannerUtils sc = new ScannerUtils();
+	ProductRepository prodRep = ProductRepository.getInstance();
+	ShelfRepository shelfRep = ShelfRepository.getInstance();
 
 	public void ecraInicio() {
 		int option = 0;
@@ -30,6 +35,7 @@ public class TextInterface {
 	private void ecraLShelves() {
 		int option = 0;
 		do {
+			
 			System.out.println("1)\t Criar Shelves");
 			System.out.println("2)\t Editar Shelves");
 			System.out.println("3)\t Consultar Shelves");
