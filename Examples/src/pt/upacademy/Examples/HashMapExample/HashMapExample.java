@@ -19,7 +19,7 @@ public class HashMapExample {
 		System.out.println(p2);
 		myApp.addProduct(p2);
 		
-		System.out.println(myApp.getAll());
+		System.out.println(myApp.getAllIds());
 //		
 //		myApp.removeProduct(p1);
 //		System.out.println(myApp.getAll());

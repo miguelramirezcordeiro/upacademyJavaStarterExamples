@@ -49,7 +49,8 @@ public class Shelf extends Entity {
 
 	@Override
 	public String toString() {
-		return "Shelf [capacity=" + capacity + ", productId=" + productId + ", dailyPrice=" + dailyPrice
-				+ "]";
+		return "Shelf [id=" + getID() + ", capacity=" + capacity + ", productId=" + productId + ", dailyPrice=" + dailyPrice + "]";
 	}
+
+	
 }

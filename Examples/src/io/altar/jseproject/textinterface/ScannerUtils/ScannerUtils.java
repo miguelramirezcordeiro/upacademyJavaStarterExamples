@@ -57,6 +57,25 @@ public class ScannerUtils {
 		} while (!valid);
 		return result;
 	}
+	
+	public int getValidInt(String msg, long[] values) {
+		int result;
+		boolean valid = false;
+		do {
+			String validString = msg + "(";
+			for (long i : values) {
+				validString += " " + i;
+			}
+			validString += " )";
+			result = getInt(validString);
+			for (long i : values) {
+				if (result == i) {
+					valid = true;
+				}
+			}
+		} while (!valid);
+		return result;
+	}
 
 	public int getValidInt(String msg, int[] values) {
 		int result;
@@ -93,6 +112,18 @@ public class ScannerUtils {
 			result = getFloat(myMsg);
 		} while (result < min || result > max);
 		return result;
+	}
+	
+	public Long[] getLongArray() {
+		String strResult = sc.nextLine();
+		String[] split = strResult.split(" ");
+		
+	}
+	
+	public Long[] getValidLongArrayString (String msg) {
+		Long[] result = getLongArray();
+		
+		return null;
 	}
 
 }
