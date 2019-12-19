@@ -96,11 +96,12 @@ public class TextInterface {
 				System.out.println("TODO - View Logic");
 				break;
 			case 4:
-				System.out.println("TODO - Delete Logic");
+				removeProduct();
 				break;
 			}
 		} while (option != 5);
 	}
+
 
 //	---------------------------> BUSINESS <---------------------------
 
@@ -122,6 +123,7 @@ public class TextInterface {
 		System.out.println(shelfRep.getAllIds());
 		long idSelector = sc.getInt("Por favor indique o id da shelf que pretende editar:");
 		Shelf editShelf = shelfRep.getById(idSelector);
+		Collection<Long> prodIds = prodRep.getAllIds();
 		boolean valid = false;
 		do {
 			if (editShelf != null) {
@@ -131,6 +133,8 @@ public class TextInterface {
 				float newDailyPrice = sc.getValidFloat("Por favor defina o novo preço diário da prateleira:\n"
 						+ "Preço diário atual: " + editShelf.getDailyPrice() + "\n", 0, 10000);
 				editShelf.setDailyPrice(newDailyPrice);
+				long newProductId = sc.getValidInt("Por favor indique o id do produto que pretende colocar na prateleira:\n" + "id do produto atual: "+ editShelf.getProductId() + "\n", prodIds);
+				editShelf.setProductId(newProductId);
 				valid = true;
 				shelfRep.editEntity(editShelf);
 			}
@@ -161,12 +165,14 @@ public class TextInterface {
 		} else {
 			int selectShelf = sc.getValidInt("Demomento estas prateleiras encontram-se disponiveis\n" + empty + "\nIndique o id da prateleira onde pretende colocar o produto: ", emptyInt);
 			newProduct.addShelfId(selectShelf);
+			prodRep.newEntityId(newProduct);
+			Shelf editShelf = shelfRep.getById((long) selectShelf);
+			editShelf.setProductId(newProduct.getID());
+			shelfRep.editEntity(editShelf);
 		}
 
 		System.out.println(getEmptyShelves());
-		prodRep.newEntityId(newProduct);
 		
-//		Falta questionar a aplicação numa shelf vazia ou se quero criar uma shelf para colocar o produto.
 	}
 	
 	private void editProduct() {
@@ -186,9 +192,29 @@ public class TextInterface {
 				int newDiscount = sc.getValidInt("Por favor defina o novo desconto aplicado ao produto:\n"
 						+ "Desconto atual: " + editProduct.getDiscount() + "%\n", 0, 10000);
 				editProduct.setDiscount(newDiscount);
+				Collection<Long> empty = getEmptyShelves();
+				int[] emptyInt = empty.stream().mapToInt(i -> i.intValue()).toArray();
+				if (empty.size() == 0) {
+					System.out.println("De momento não existem prateleiras livres, deverá inicialmente criar uma prateleira e posteriormente atribuir o produto à prateleira.");
+				} else {
+					int selectShelf = sc.getValidInt("Demomento estas prateleiras encontram-se disponiveis\n" + empty + "\nIndique o id da prateleira onde pretende colocar o produto: ", emptyInt);
+					editProduct.addShelfId(selectShelf);
+					prodRep.editEntity(editProduct);
+					Shelf editShelf = shelfRep.getById((long) selectShelf);
+					editShelf.setProductId(editProduct.getID());
+					shelfRep.editEntity(editShelf);
+				}
 				valid = true;
+				
 			}
 		} while (!valid);
+	}
+	
+	private void removeProduct() {
+		System.out.println("----> REMOVER PRODUTO <----");
+		System.out.println(prodRep.getAllIds());
+		long idSelector = sc.getInt("Por favor indique o id da produto que quer remover: ");
+		prodRep.removeById(idSelector);
 	}
 	
 	private Collection<Long> getEmptyShelves() {

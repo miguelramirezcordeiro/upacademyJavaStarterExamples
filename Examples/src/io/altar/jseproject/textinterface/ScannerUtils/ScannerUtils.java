@@ -1,5 +1,9 @@
 package io.altar.jseproject.textinterface.ScannerUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 public class ScannerUtils {
@@ -14,7 +18,7 @@ public class ScannerUtils {
 		lineSc = new Scanner(value);
 		return lineSc.hasNextInt();
 	}
-	
+
 	public boolean isFloat(String value) {
 		lineSc = new Scanner(value);
 		return lineSc.hasNextFloat();
@@ -24,7 +28,7 @@ public class ScannerUtils {
 		lineSc = new Scanner(value);
 		return lineSc.nextInt();
 	}
-	
+
 	public float toFloat(String value) {
 		lineSc = new Scanner(value);
 		return lineSc.nextFloat();
@@ -43,7 +47,7 @@ public class ScannerUtils {
 		} while (!valid);
 		return result;
 	}
-	
+
 	public float getFloat(String msg) {
 		boolean valid = false;
 		float result = 0;
@@ -57,7 +61,7 @@ public class ScannerUtils {
 		} while (!valid);
 		return result;
 	}
-	
+
 	public int getValidInt(String msg, long[] values) {
 		int result;
 		boolean valid = false;
@@ -104,7 +108,7 @@ public class ScannerUtils {
 		} while (result < min || result > max);
 		return result;
 	}
-	
+
 	public float getValidFloat(String msg, float min, float max) {
 		float result;
 		do {
@@ -113,17 +117,47 @@ public class ScannerUtils {
 		} while (result < min || result > max);
 		return result;
 	}
-	
-	public Long[] getLongArray() {
+
+	public List<Long> getLongArray() {
+		List<Long> longs = new ArrayList<Long>();
 		String strResult = sc.nextLine();
-		String[] split = strResult.split(" ");
-		
+		Scanner scanner = new Scanner(strResult);
+
+		while (scanner.hasNext()) {
+			if (scanner.hasNextInt()) {
+				longs.add((long) scanner.nextInt());
+			} else {
+				scanner.next();
+			}
+		}
+		System.out.println(longs);
+		return longs;
+
 	}
-	
-	public Long[] getValidLongArrayString (String msg) {
-		Long[] result = getLongArray();
-		
+
+	public Long[] getValidLongArrayString(String msg) {
+		List<Long> result = getLongArray();
+
 		return null;
+	}
+
+	public long getValidInt(String msg, Collection<Long> values) {
+		int result;
+		boolean valid = false;
+		do {
+			String validString = msg + "(";
+			for (long i : values) {
+				validString += " " + i;
+			}
+			validString += " )";
+			result = getInt(validString);
+			for (long i : values) {
+				if (result == i) {
+					valid = true;
+				}
+			}
+		} while (!valid);
+		return result;
 	}
 
 }
