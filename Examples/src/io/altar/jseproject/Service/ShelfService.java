@@ -1,10 +1,15 @@
 package io.altar.jseproject.Service;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
+import io.altar.jseproject.models.Product;
 import io.altar.jseproject.models.Shelf;
+import io.altar.jseproject.repositories.ShelfRepository;
 
-public class ShelfService implements ShelfServiceInterface<Shelf>{
+public class ShelfService extends EntityService<Shelf, ShelfRepository> implements ShelfServiceInterface<Shelf>{
+	
+	public static final ProductService PRODUCT_SERVICE = new ProductService();
 
 	@Override
 	public void update(Shelf entity) {
@@ -30,7 +35,13 @@ public class ShelfService implements ShelfServiceInterface<Shelf>{
 	@Override
 	public void removeById(Long key) {
 		shelfRep.removeById(key);
-		
+		Collection<Product> productInShelf = PRODUCT_SERVICE.getAll().stream().filter(product -> product.getShelvesIds().contains(key) == true).collect(Collectors.toList());
+		System.out.println(productInShelf.toString());
+		for (Product product : productInShelf) {
+			int tempIndex = product.getShelvesIds().indexOf(key);
+			product.getShelvesIds().remove(tempIndex);
+			PRODUCT_SERVICE.update(product);
+		}
 	}
 
 	@Override
@@ -43,6 +54,8 @@ public class ShelfService implements ShelfServiceInterface<Shelf>{
 		shelfRep.printAll();
 		
 	}
+	
+
 
 
 

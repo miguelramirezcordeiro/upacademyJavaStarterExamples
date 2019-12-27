@@ -31,23 +31,23 @@ public class ShelfEdit extends State {
 					float newDailyPrice = sc.getValidFloat("Por favor defina o novo preço diário da prateleira:\n"
 							+ "Preço diário atual: " + editShelf.getDailyPrice() + "\n", 0, 10000);
 					editShelf.setDailyPrice(newDailyPrice);
-					long prodTempId = editShelf.getProductId();
-					long newProductId = sc.getValidInt("Por favor indique o id do produto que pretende colocar na prateleira:\n"
-									+ "id do produto atual: " + editShelf.getProductId() + "\n", prodIds);
-					editShelf.setProductId(newProductId);
-					if (newProductId == 0 && editShelf.getProductId() == 0) {
-						editShelf.setProductId(0);
-					} else if (newProductId == 0) {
-						Product productInShelf = PS.getById(prodTempId);
-//						System.out.println(productInShelf.toString());
-						int tempIndex = productInShelf.getShelvesIds().indexOf(prodTempId);
-						System.out.println("TempIndex: " + tempIndex);
-						productInShelf.getShelvesIds().remove(tempIndex);
-					} else {
-						Product productInShelf = PS.getById(newProductId);
-						productInShelf.getShelvesIds().add(idSelector);
-						PS.update(productInShelf);
-					}
+//					long prodTempId = editShelf.getProductId();
+//					long newProductId = sc.getValidInt("Por favor indique o id do produto que pretende colocar na prateleira:\n"
+//									+ "id do produto atual: " + editShelf.getProductId() + "\n", prodIds);
+//					editShelf.setProductId(newProductId);
+//					if (newProductId == 0 && editShelf.getProductId() == 0) {
+//						editShelf.setProductId(0);
+//					} else if (newProductId == 0) {
+//						Product productInShelf = PS.getById(prodTempId);
+////						System.out.println(productInShelf.toString());
+//						int tempIndex = productInShelf.getShelvesIds().indexOf(prodTempId);
+//						System.out.println("TempIndex: " + tempIndex);
+//						productInShelf.getShelvesIds().remove(tempIndex);
+//					} else {
+//						Product productInShelf = PS.getById(newProductId);
+//						productInShelf.getShelvesIds().add(idSelector);
+//						PS.update(productInShelf);
+//					}
 					valid = true;
 					SS.update(editShelf);
 				}

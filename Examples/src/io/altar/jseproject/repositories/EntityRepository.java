@@ -7,7 +7,7 @@ import java.util.Map;
 
 import io.altar.jseproject.models.Entity;
 
-abstract class EntityRepository<T extends Entity> {
+public abstract class EntityRepository<T extends Entity> {
 
 	private Long id = (long) 0;
 	Map<Long, T> myRepository = new HashMap<Long, T>();

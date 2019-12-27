@@ -13,11 +13,13 @@ public class ProductRemove extends State {
 		System.out.println(PS.getAllIds());
 /*		if (prodRep.getAllIds().size() != 0) {*/
 		if (PS.getAllIds().size() != 0) {
-			long idSelector = sc.getInt("Por favor indique o id do produto que quer remover: ");
+			int idSelector = sc.getInt("Por favor indique o id do produto que quer remover: ");
 //			prodRep.removeById(idSelector);
-			PS.removeById(idSelector);
+			PS.removeById((long) idSelector);
+			PS.removeProductToShelf(idSelector, 0);
 //			Collection<Shelf> shelfWithProduct = shelfRep.getAll().stream().filter(shelf -> shelf.getProductId() == idSelector).collect(Collectors.toList());
-			Collection<Shelf> shelfWithProduct = SS.getAll().stream().filter(shelf -> shelf.getProductId() == idSelector).collect(Collectors.toList());
+//			Collection<Shelf> shelfWithProduct = PS.getAll().stream().filter(shelf -> shelf.getProductId() == idSelector).collect(Collectors.toList());
+			Collection<Shelf> shelfWithProduct = PS.getShelvesWithProd(idSelector);
 			for (Shelf shelf : shelfWithProduct) {
 				shelf.setProductId(0);
 			}

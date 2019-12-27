@@ -13,13 +13,13 @@ public class ShelfRemove extends State {
 		if (SS.getAllIds().size() != 0) {
 			long idSelector = sc.getInt("Por favor indique o id da prateleira que quer remover: ");
 			SS.removeById(idSelector);
-			Collection<Product> productInShelf = PS.getAll().stream().filter(product -> product.getShelvesIds().contains(idSelector) == true)
-					.collect(Collectors.toList());
-			for (Product product : productInShelf) {
-				int tempIndex = product.getShelvesIds().indexOf(idSelector);
-				product.getShelvesIds().remove(tempIndex);
-				PS.update(product);
-			}
+//			Collection<Product> productInShelf = PS.getAll().stream().filter(product -> product.getShelvesIds().contains(idSelector) == true)
+//					.collect(Collectors.toList());
+//			for (Product product : productInShelf) {
+//				int tempIndex = product.getShelvesIds().indexOf(idSelector);
+//				product.getShelvesIds().remove(tempIndex);
+//				PS.update(product);
+//			}
 		} else {
 			System.out.println("\n\n\n\nNão existem prateleiras a remover. Primeiro crie uma prateleira!\n\n\n\n");
 		}
